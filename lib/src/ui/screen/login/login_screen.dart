@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inlingua/src/assets/styles/app_images.dart';
 import 'package:inlingua/src/assets/styles/app_widget_size.dart';
+import 'package:inlingua/src/assets/theme/app_colors.dart';
 import 'package:inlingua/src/blocs/login/login_bloc.dart';
 import 'package:inlingua/src/constants/app_text_constants.dart';
-import 'package:inlingua/src/data/store/app_storage.dart';
 import 'package:inlingua/src/data/store/app_utils.dart';
 import 'package:inlingua/src/data/validator/input_validator.dart';
 import 'package:inlingua/src/ui/navigation/screen_routes.dart';
@@ -40,7 +40,7 @@ class _LoginScreenState extends BaseScreenState<LoginScreen> {
     }
     if (state is LoginSuccessState) {
       showAlert(state.message, callBack: () {
-        Navigator.of(context).pushNamed(ScreenRoutes.BATCHES_LIST_SCREEN);
+        Navigator.of(context).pushNamedAndRemoveUntil(ScreenRoutes.BATCHES_LIST_SCREEN,(route) => false);
       });
     } else if (state is LoginFailedState) {
       showAlert(state.message);
@@ -54,16 +54,21 @@ class _LoginScreenState extends BaseScreenState<LoginScreen> {
     );
   }
 
-  SingleChildScrollView _buildBody() {
-    return SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.only(
-            left: 16, right: 16, top: MediaQuery.of(context).padding.top + 20),
+  Container _buildBody() {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+      padding: EdgeInsets.only(left: 16, right: 16),
+      child: SingleChildScrollView(
         child: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              _buildLoginheader(),
+              Padding(
+                padding: const EdgeInsets.only(top: 20),
+                child: _buildLoginheader(),
+              ),
               _buildLoginWrap(),
             ],
           ),
@@ -78,11 +83,18 @@ class _LoginScreenState extends BaseScreenState<LoginScreen> {
 
   Container _buildLoginWrap() {
     return Container(
-      margin: EdgeInsets.only(top: 40),
+      margin: EdgeInsets.only(top: 40, bottom: 30),
       padding: const EdgeInsets.fromLTRB(32, 48, 32, 48),
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
         borderRadius: AppWidgetSize.containerWrapRadius,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.appShadowColor,
+            blurRadius: 15,
+            offset: Offset(10, 13),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -123,6 +135,7 @@ class _LoginScreenState extends BaseScreenState<LoginScreen> {
         children: <Widget>[
           _buildInpuField(
             TextField(
+              style: Theme.of(context).inputDecorationTheme.labelStyle,
               controller: _usernameController,
               // inputFormatters: InputValidator.username,
               decoration: const InputDecoration(
@@ -134,6 +147,7 @@ class _LoginScreenState extends BaseScreenState<LoginScreen> {
             padding: const EdgeInsets.only(top: 16),
             child: _buildInpuField(
               TextField(
+                style: Theme.of(context).inputDecorationTheme.labelStyle,
                 controller: _passwordController,
                 inputFormatters: InputValidator.password,
                 decoration: const InputDecoration(

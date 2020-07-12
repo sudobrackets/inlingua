@@ -23,6 +23,20 @@ class AppImages {
     );
   }
 
+  static DecorationImage appBackground({double width, double height}) {
+    return const DecorationImage(
+      image: AssetImage('lib/src/assets/images/app_bg.png'),
+      fit: BoxFit.fill,
+    );
+  }
+
+  static Image appBackgroundCover({double width, double height}) => Image(
+        image: const AssetImage('lib/src/assets/images/app_bg.png'),
+        fit: BoxFit.fill,
+        width: width ?? 200,
+        height: height ?? 51,
+      );
+
   static Image logo({double width, double height}) => Image(
         image: const AssetImage('lib/src/assets/images/inlingua.png'),
         fit: BoxFit.cover,
@@ -31,7 +45,7 @@ class AppImages {
       );
 
   static Image loader({double width, double height}) => Image(
-        image:const AssetImage('lib/src/assets/images/loader.gif'),
+        image: const AssetImage('lib/src/assets/images/loader.gif'),
         fit: BoxFit.cover,
         width: width,
         height: height,

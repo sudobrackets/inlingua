@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inlingua/src/assets/styles/app_images.dart';
 import 'package:inlingua/src/assets/styles/app_widget_size.dart';
+import 'package:inlingua/src/assets/theme/app_colors.dart';
 import 'package:inlingua/src/blocs/forgot_password/forgot_password_bloc.dart';
 import 'package:inlingua/src/constants/app_text_constants.dart';
 import 'package:inlingua/src/data/store/app_utils.dart';
@@ -46,6 +47,7 @@ class _ForgotPasswordScreenState extends BaseScreenState<ForgotPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: _buildAppBar(),
       body: _buildBody(),
     );
@@ -54,6 +56,7 @@ class _ForgotPasswordScreenState extends BaseScreenState<ForgotPasswordScreen> {
   AppBar _buildAppBar() {
     return AppBar(
       automaticallyImplyLeading: false,
+      backgroundColor: Colors.transparent,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -63,14 +66,19 @@ class _ForgotPasswordScreenState extends BaseScreenState<ForgotPasswordScreen> {
     );
   }
 
-  SingleChildScrollView _buildBody() {
-    return SingleChildScrollView(
-      child: Container(
-        padding: EdgeInsets.only(
-            left: 16, right: 16, top: MediaQuery.of(context).padding.top + 20),
+  Container _buildBody() {
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      padding: EdgeInsets.only(
+        left: 16,
+        right: 16,
+        top: MediaQuery.of(context).padding.top,
+      ),
+      child: SingleChildScrollView(
         child: SafeArea(
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               _buildForgotPasswordheader(),
               _buildForgotPasswordWrap(),
@@ -92,6 +100,13 @@ class _ForgotPasswordScreenState extends BaseScreenState<ForgotPasswordScreen> {
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
         borderRadius: AppWidgetSize.containerWrapRadius,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.appShadowColor,
+            blurRadius: 15,
+            offset: Offset(10, 13),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -131,6 +146,7 @@ class _ForgotPasswordScreenState extends BaseScreenState<ForgotPasswordScreen> {
         children: <Widget>[
           _buildInpuField(
             TextField(
+              style: Theme.of(context).inputDecorationTheme.labelStyle,
               controller: _emailController,
               decoration: const InputDecoration(
                 hintText: AppTextConstants.EMAIL_ADDRESS,

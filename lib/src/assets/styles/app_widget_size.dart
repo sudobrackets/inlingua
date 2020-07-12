@@ -5,7 +5,7 @@ class AppWidgetSize {
 
   static const double captionSize = 14;
   static const double headline6Size = 18;
-  static const double headline5Size = 25;
+  static const double headline5Size = 23;
   static const double headline4Size = 20;
   static const double headline3Size = 16;
   static const double headline2Size = 14;

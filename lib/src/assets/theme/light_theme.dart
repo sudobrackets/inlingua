@@ -7,7 +7,7 @@ const Color APP_PRIMARY_LIGHT_COLOR = Color(0xFFF0B334);
 const Color APP_PRIMARY_DARK_COLOR = Color(0xFFf0b234);
 const Color APP_ACCENT_COLOR = Color(0xFF37C1AA);
 const Color APP_BACKGROUND_COLOR = Color(0xFFFFFFFF);
-const Color APP_SCAFFOLD_BACKGROUND_COLOR = APP_PRIMARY_DARK_COLOR;
+const Color APP_SCAFFOLD_BACKGROUND_COLOR = Colors.transparent;
 const Color APP_BAR_BACKGROUND_COLOR = Color(0xFFFFFFFF);
 const Color APP_BORDER_COLOR = Color(0xFF707070);
 const Color APP_BUTTON_TEXT_COLOR = Color(0xFFFFFFFF);
@@ -24,6 +24,7 @@ const Color APP_FOCUS_INPUT_BORDER_COLOR = Color(0xFFEAEBEC);
 const Color APP_ICON_COLOR = Color(0xFF000000);
 const Color APP_ACCENT_ICON_COLOR = Color(0xFF717880);
 const Color APP_ERROR_COLOR = Color(0xFFD83831);
+const Color APP_DIVIDER_COLOR = Color(0xFFEEEEEE);
 
 ThemeData lightTheme() {
   return ThemeData(
@@ -34,6 +35,7 @@ ThemeData lightTheme() {
     accentColor: APP_ACCENT_COLOR,
     backgroundColor: APP_BACKGROUND_COLOR,
     scaffoldBackgroundColor: APP_SCAFFOLD_BACKGROUND_COLOR,
+    dividerColor: APP_DIVIDER_COLOR,
     fontFamily: 'Lato',
     appBarTheme: const AppBarTheme(
       elevation: 0.0,

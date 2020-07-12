@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:inlingua/src/assets/styles/app_images.dart';
 import 'package:inlingua/src/assets/styles/app_widget_size.dart';
+import 'package:inlingua/src/assets/theme/app_colors.dart';
 import 'package:inlingua/src/blocs/sign_up/sign_up_bloc.dart';
 import 'package:inlingua/src/constants/app_text_constants.dart';
 import 'package:inlingua/src/data/store/app_utils.dart';
@@ -60,6 +61,7 @@ class _SingUpScreenState extends BaseScreenState<SingUpScreen> {
   AppBar _buildAppBar() {
     return AppBar(
       automaticallyImplyLeading: false,
+      backgroundColor: Colors.transparent,
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
@@ -92,11 +94,18 @@ class _SingUpScreenState extends BaseScreenState<SingUpScreen> {
 
   _buildSignUpWrap() {
     return Container(
-      margin: EdgeInsets.only(top: 40),
+      margin: EdgeInsets.only(top: 40, bottom: 30),
       padding: const EdgeInsets.fromLTRB(32, 48, 32, 48),
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
         borderRadius: AppWidgetSize.containerWrapRadius,
+        boxShadow: [
+          BoxShadow(
+            color: AppColors.appShadowColor,
+            blurRadius: 15,
+            offset: Offset(10, 13),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -136,6 +145,7 @@ class _SingUpScreenState extends BaseScreenState<SingUpScreen> {
         children: <Widget>[
           _buildInpuField(
             TextField(
+              style: Theme.of(context).inputDecorationTheme.labelStyle,
               controller: _usernameController,
               inputFormatters: InputValidator.username,
               decoration: const InputDecoration(
@@ -145,6 +155,7 @@ class _SingUpScreenState extends BaseScreenState<SingUpScreen> {
           ),
           _buildInpuField(
             TextField(
+              style: Theme.of(context).inputDecorationTheme.labelStyle,
               controller: _emailController,
               decoration: const InputDecoration(
                 hintText: AppTextConstants.EMAIL_ADDRESS,
@@ -153,6 +164,7 @@ class _SingUpScreenState extends BaseScreenState<SingUpScreen> {
           ),
           _buildInpuField(
             TextField(
+              style: Theme.of(context).inputDecorationTheme.labelStyle,
               controller: _phoneNumberController,
               inputFormatters: InputValidator.mobileNumberRegEx,
               keyboardType: TextInputType.number,
@@ -163,6 +175,7 @@ class _SingUpScreenState extends BaseScreenState<SingUpScreen> {
           ),
           _buildInpuField(
             TextField(
+              style: Theme.of(context).inputDecorationTheme.labelStyle,
               controller: _passwordController,
               inputFormatters: InputValidator.password,
               obscureText: true,

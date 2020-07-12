@@ -1,6 +1,6 @@
 class AppTextConstants {
   // Login Screen
-  static const String APP_NAME = 'Inlingua';
+  static const String APP_NAME = 'Inlingua Bangalore';
   static const String LOGIN = 'LOGIN';
   static const String LOGIN_SUBHEADING = 'Sign in to Continue';
   static const String USER_ID = 'User ID';
@@ -31,4 +31,8 @@ class AppTextConstants {
   static const String FORUM_BATCHES = 'Forum Batches';
 
   static const String VIEW_DETAILS = 'view details';
+
+  // Language List
+  static const String CHOOSE_LANGUAGE = 'CHOOSE LANGUAGE';
+  static const String SEARCH_LANGUAGE = 'Search for Language';
 }
