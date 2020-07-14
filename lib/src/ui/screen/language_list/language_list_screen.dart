@@ -112,21 +112,29 @@ class _LanguageListState extends BaseScreenState<LanguageList> {
               ),
             ),
           ),
-          Container(
-            width: 36,
-            height: 36,
-            decoration: BoxDecoration(
-              color: Theme.of(context).accentColor,
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Icon(
-              Icons.search,
-              size: 20,
+          GestureDetector(
+            onTap: _onPressed,
+            child: Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: Theme.of(context).accentColor,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Icon(
+                Icons.search,
+                size: 20,
+              ),
             ),
           )
         ],
       ),
     );
+  }
+
+  _onPressed() {
+    WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+    setState(() {});
   }
 
   Widget _languageListSection() {
@@ -135,6 +143,17 @@ class _LanguageListState extends BaseScreenState<LanguageList> {
       return currentState is LanguageListDoneState;
     }, builder: (BuildContext context, LanguageListState state) {
       if (state is LanguageListDoneState) {
+        List<LanguageListModel> _languageList = state.languageList;
+
+        final String searchText = _searchController.text.trim();
+
+        if (searchText != null && searchText != '') {
+          _languageList = _languageList
+              .where((LanguageListModel element) => element.language
+                  .toLowerCase()
+                  .contains(searchText.toLowerCase()))
+              .toList();
+        }
         return Container(
           height: double.infinity,
           width: double.infinity,
@@ -145,9 +164,10 @@ class _LanguageListState extends BaseScreenState<LanguageList> {
             borderRadius: BorderRadius.circular(10),
           ),
           child: ListView.builder(
-            itemCount: state.languageList.length,
+            itemCount: _languageList.length,
             itemBuilder: (BuildContext ctxt, int index) {
-              LanguageListModel languageListItem = state.languageList[index];
+              final LanguageListModel languageListItem = _languageList[index];
+
               return Container(
                 height: 80,
                 margin: const EdgeInsets.only(top: 20),

@@ -1,6 +1,6 @@
 class AppTextConstants {
   // Login Screen
-  static const String APP_NAME = 'Inlingua Bangalore';
+  static const String APP_NAME = 'inlingua Bangalore';
   static const String LOGIN = 'LOGIN';
   static const String LOGIN_SUBHEADING = 'Sign in to Continue';
   static const String USER_ID = 'User ID';

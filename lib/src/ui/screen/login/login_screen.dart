@@ -39,9 +39,8 @@ class _LoginScreenState extends BaseScreenState<LoginScreen> {
       stopLoader();
     }
     if (state is LoginSuccessState) {
-      showAlert(state.message, callBack: () {
-        Navigator.of(context).pushNamedAndRemoveUntil(ScreenRoutes.BATCHES_LIST_SCREEN,(route) => false);
-      });
+      Navigator.of(context).pushNamedAndRemoveUntil(
+          ScreenRoutes.BATCHES_LIST_SCREEN, (route) => false);
     } else if (state is LoginFailedState) {
       showAlert(state.message);
     }
