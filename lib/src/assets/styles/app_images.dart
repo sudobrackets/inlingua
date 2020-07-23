@@ -132,4 +132,49 @@ class AppImages {
         width: width,
         height: height,
       );
+  static SvgPicture logout(BuildContext context,
+          {Color color, double width, double height}) =>
+      getSVGImage(
+        'lib/src/assets/images/logout.svg',
+        context,
+        color: color ?? Theme.of(context).accentIconTheme.color,
+        width: width,
+        height: height,
+      );
+  static SvgPicture presentation(BuildContext context,
+          {Color color, double width, double height}) =>
+      getSVGImage(
+        'lib/src/assets/images/presentation.svg',
+        context,
+        color: color ?? Theme.of(context).accentIconTheme.color,
+        width: width,
+        height: height,
+      );
+  static SvgPicture book(BuildContext context,
+          {Color color, double width, double height}) =>
+      getSVGImage(
+        'lib/src/assets/images/book.svg',
+        context,
+        color: color ?? Theme.of(context).accentIconTheme.color,
+        width: width,
+        height: height,
+      );
+  static SvgPicture translation(BuildContext context,
+          {Color color, double width, double height}) =>
+      getSVGImage(
+        'lib/src/assets/images/translation.svg',
+        context,
+        color: color ?? Theme.of(context).accentIconTheme.color,
+        width: width,
+        height: height,
+      );
+  static SvgPicture batch(BuildContext context,
+          {Color color, double width, double height}) =>
+      getSVGImage(
+        'lib/src/assets/images/batch.svg',
+        context,
+        color: color ?? Theme.of(context).accentIconTheme.color,
+        width: width,
+        height: height,
+      );
 }

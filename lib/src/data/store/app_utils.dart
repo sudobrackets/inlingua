@@ -14,4 +14,8 @@ class AppUtils {
     else
       return true;
   }
+
+  String camelCase(String data) {
+    return '${data[0].toUpperCase()}${data.substring(1).toLowerCase()}';
+  }
 }

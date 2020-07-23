@@ -19,8 +19,11 @@ class LoginScreen extends BaseScreen {
 }
 
 class _LoginScreenState extends BaseScreenState<LoginScreen> {
-  final TextEditingController _usernameController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _usernameController = TextEditingController()
+  ..text='';
+  final TextEditingController _passwordController = TextEditingController()
+  ..text='';
+
   LoginBloc _loginBloc;
   @override
   void initState() {

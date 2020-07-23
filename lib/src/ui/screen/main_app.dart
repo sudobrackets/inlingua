@@ -75,16 +75,21 @@ class _AppRoutesState extends State<AppRoutes> {
       builder: (BuildContext context, ThemeState state) {
         return Container(
           decoration: BoxDecoration(image: AppImages.appBackground()),
-          child: MaterialApp(
-            builder: (BuildContext context, Widget child) {
-              return MediaQuery(
-                child: child,
-                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-              );
+          child: GestureDetector(
+            onTap: () {
+              WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
             },
-            initialRoute: ScreenRoutes.INIT_SCREEN,
-            theme: AppTheme.themeManager(state.themeType),
-            onGenerateRoute: generateRoute,
+            child: MaterialApp(
+              builder: (BuildContext context, Widget child) {
+                return MediaQuery(
+                  child: child,
+                  data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                );
+              },
+              initialRoute: ScreenRoutes.INIT_SCREEN,
+              theme: AppTheme.themeManager(state.themeType),
+              onGenerateRoute: generateRoute,
+            ),
           ),
         );
       },

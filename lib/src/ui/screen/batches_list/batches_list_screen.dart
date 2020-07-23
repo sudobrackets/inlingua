@@ -5,6 +5,7 @@ import 'package:inlingua/src/constants/storage_constants.dart';
 import 'package:inlingua/src/data/store/app_storage.dart';
 import 'package:inlingua/src/ui/navigation/screen_routes.dart';
 import 'package:inlingua/src/ui/screen/base/base_screen.dart';
+import 'package:inlingua/src/ui/widgets/drawer_widget.dart';
 
 class BatchesListScreen extends BaseScreen {
   BatchesListScreen({Key key}) : super(key: key);
@@ -14,11 +15,15 @@ class BatchesListScreen extends BaseScreen {
 }
 
 class _BatchesListScreenState extends BaseScreenState<BatchesListScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: _buildAppBar(),
       body: _buildBody(),
+      endDrawer: DrawerWidget(name:ScreenRoutes.BATCHES_LIST_SCREEN),
     );
   }
 
@@ -34,12 +39,17 @@ class _BatchesListScreenState extends BaseScreenState<BatchesListScreen> {
             height: 38,
           ),
           GestureDetector(
-            onTap: _logoutButtonPressed,
-            child: Icon(Icons.power_settings_new),
+            onTap: _menuButtonPressed,
+            child: Icon(Icons.menu),
           ),
         ],
       ),
+      actions: <Widget>[Container()],
     );
+  }
+
+  void _menuButtonPressed() {
+    _scaffoldKey.currentState.openEndDrawer();
   }
 
   void _logoutButtonPressed() {

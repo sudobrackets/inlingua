@@ -31,13 +31,15 @@ class HTTPClient {
   }
 
   Future<String> postRequest({String url, String data}) async {
-    print('HTTPClient Request> $url body> $data');
     final HttpClient client = HttpClient();
+    print('headers ${data}');
 
     try {
       client.connectionTimeout = _connectTimeout;
       final HttpClientRequest request = await client.postUrl(Uri.parse(url));
+      print('headers ${request.headers}');
       request.headers.set('Content-type', 'application/json');
+      request.headers.set('Content-Length', data.length);
       if (AppStore().getSessionCookie() != null)
         request.headers.set('Cookie', AppStore().getSessionCookie());
       request.write(data);
@@ -45,6 +47,7 @@ class HTTPClient {
           await request.close().timeout(_requestTimeout);
       storeCookie(response.headers);
       final String sResponse = await response.transform(utf8.decoder).join();
+      print('HTTPClient Request> $url body> $data');
       print('HTTPClient Response> $sResponse');
       return sResponse;
     } catch (e) {

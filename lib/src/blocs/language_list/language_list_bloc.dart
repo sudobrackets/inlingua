@@ -20,8 +20,6 @@ class LanguageListBloc extends Bloc<LanguageListEvent, LanguageListState> {
   }
 
   Stream<LanguageListState> _handleFetchLanguageListEvent() async* {
-    debugPrint('statement');
-
     yield ProgressState();
     final LanguageListResponseModel signUpReponseModel =
         await LanguageListRepository().fetchList();

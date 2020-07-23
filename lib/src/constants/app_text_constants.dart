@@ -35,4 +35,11 @@ class AppTextConstants {
   // Language List
   static const String CHOOSE_LANGUAGE = 'CHOOSE LANGUAGE';
   static const String SEARCH_LANGUAGE = 'Search for Language';
+
+  // Side menu 
+  static const String LIBRARY = 'Library';
+  static const String MY_CLASSES = 'My Classes';
+  static const String LOG_OUT = 'Log Out';
+
+
 }

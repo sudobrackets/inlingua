@@ -5,7 +5,9 @@ import 'package:inlingua/src/assets/theme/app_colors.dart';
 import 'package:inlingua/src/blocs/language_list/language_list_bloc.dart';
 import 'package:inlingua/src/constants/app_text_constants.dart';
 import 'package:inlingua/src/models/language_list/language_list_response_mdoel.dart';
+import 'package:inlingua/src/ui/navigation/screen_routes.dart';
 import 'package:inlingua/src/ui/screen/base/base_screen.dart';
+import 'package:inlingua/src/ui/widgets/drawer_widget.dart';
 
 class LanguageList extends BaseScreen {
   Map arguments;
@@ -17,6 +19,7 @@ class LanguageList extends BaseScreen {
 
 class _LanguageListState extends BaseScreenState<LanguageList> {
   final TextEditingController _searchController = TextEditingController();
+final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   LanguageListBloc _languageListBloc;
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -43,8 +46,10 @@ class _LanguageListState extends BaseScreenState<LanguageList> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: _buildAppBar(),
       body: _buildBody(),
+      endDrawer: DrawerWidget(name:ScreenRoutes.LANGUAGE_LIST),
     );
   }
 
@@ -65,10 +70,13 @@ class _LanguageListState extends BaseScreenState<LanguageList> {
           ),
         ],
       ),
+      actions: <Widget>[Container()],
     );
   }
 
-  void _menuButtonPressed() {}
+  void _menuButtonPressed() {
+     _scaffoldKey.currentState.openEndDrawer();
+  }
 
   Widget _buildBody() {
     return Padding(
@@ -102,6 +110,7 @@ class _LanguageListState extends BaseScreenState<LanguageList> {
           Expanded(
             child: TextField(
               style: Theme.of(context).inputDecorationTheme.labelStyle,
+              onChanged: _searchOnChange,
               controller: _searchController,
               decoration: InputDecoration(
                 hintText: AppTextConstants.SEARCH_LANGUAGE,
@@ -112,28 +121,27 @@ class _LanguageListState extends BaseScreenState<LanguageList> {
               ),
             ),
           ),
-          GestureDetector(
-            onTap: _onPressed,
-            child: Container(
-              width: 36,
-              height: 36,
-              decoration: BoxDecoration(
-                color: Theme.of(context).accentColor,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Icon(
-                Icons.search,
-                size: 20,
-              ),
-            ),
-          )
+          // GestureDetector(
+          //   onTap: searchOnChange,
+          //   child: Container(
+          //     width: 36,
+          //     height: 36,
+          //     decoration: BoxDecoration(
+          //       color: Theme.of(context).accentColor,
+          //       borderRadius: BorderRadius.circular(10),
+          //     ),
+          //     child: Icon(
+          //       Icons.search,
+          //       size: 20,
+          //     ),
+          //   ),
+          // )
         ],
       ),
     );
   }
 
-  _onPressed() {
-    WidgetsBinding.instance.focusManager.primaryFocus?.unfocus();
+  void _searchOnChange(data) {
     setState(() {});
   }
 
@@ -151,7 +159,7 @@ class _LanguageListState extends BaseScreenState<LanguageList> {
           _languageList = _languageList
               .where((LanguageListModel element) => element.language
                   .toLowerCase()
-                  .contains(searchText.toLowerCase()))
+                  .startsWith(searchText.toLowerCase()))
               .toList();
         }
         return Container(
